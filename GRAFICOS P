@@ -1,0 +1,167 @@
+# ______________Gráficos____________
+#   Matriz pingüinos, se encuentra en aula
+
+# --------------------------------------------
+# Importación de matriz
+# -------------------------------------------
+
+# importar datos / desde excel / navegar / seleccionar archivo / aceptar
+
+# -----------------------------------------------------
+#     exploración
+# -----------------------------------
+
+tenue ( pingüinos )
+
+# Nombre de las variables
+colnames ( pingüinos )
+
+# tipo de variables
+str ( pingüinos )
+
+
+# En busca de valores perdidos (NA's)
+anyNA ( pingüinos )
+
+# Estadística descriptiva
+Resumen ( pingüinos )
+
+# -----------------------------------------
+# Configuración de la matriz
+# ----------------------------------------------------------
+
+# 1.- Convertir las variables categoticas a factores
+pinguinos $ especie <- factor ( pinguinos $ especie ,
+                         niveles = c( " Adelie " , " Gentoo " , " Chinstrap " ))
+
+
+pinguinos $ isla <- factor ( pinguinos $ isla ,
+                      niveles = c( " Torgersen " , " Biscoe " , " Sueño " ))
+
+
+pinguinos $ genero <- factor ( pinguinos $ genero ,
+                        niveles = c( " masculino " , " femenino " ))
+
+pingüinos $ a ñ o <- factor ( pingüinos $ a ñ o ,
+                     niveles = c( " 2007 " , " 2008 " , " 2009 " ))
+
+str ( pingüinos )
+
+Resumen ( pingüinos )
+
+Ver ( pingüinos )
+
+# ---Este paso no es necesario.---
+# 2.- Creamos una nueva matriz de datos donde se seleccionan
+# las columnas de la 2 a la 9.
+pinguinos1 <- pinguinos [, 2 : 9 ]
+
+
+# ---------------------------------
+#    Librerias
+# ----------------------------------
+instalar.paquetes ( " ggplot2 " )
+
+biblioteca ( ggplot2 )
+
+# ------------------------------------------------
+#          diagrama de caja
+# ------------------------------------------------- -
+
+# 1.- Creación de un vector de color
+color = c( " azul cielo " , " rojovioleta1 " )
+
+# 2.- Creación del gráfico
+
+BX <- ggplot( pingüinos , aes( x = genero , y = largo_pico_mm )) +
+  geom_boxplot ( relleno = color ) +
+  ggtitle( " Diagrama de caja " ) +
+  xlab( " Género " ) +
+  ylab( " largo de la aleta (mm) " ) +
+  tema_bw()
+
+# 3.- Visualización del diagrama de caja
+BX
+
+# ------------------------------------------------- -
+#             gráficos de barras
+# ------------------------------------------------- -
+
+# 1.- Creación de un vector de color
+color = c( " turquesa oscuro " , " violeta oscuro " , " rosa oscuro " )
+
+# 2.- Creación del gráfico
+GB1 <- ggplot( pingüinos , aes( x = a ñ o )) +
+  geom_bar( color =  " negro " , relleno = color ) +
+  ggtitle( " Gráfico de Barras " ) +
+  xlab( " Año " ) +
+  ylab( " Frecuencias " ) +
+  tema_minimal()
+
+# 3.- Visualización del gráfico
+GB1
+
+# 4.- Barras verticales
+
+GB2 <- ggplot( pingüinos , aes( x = a ñ o )) +
+  geom_bar( color =  " negro " , relleno = color ) +
+  ggtitle( " Gráfico de Barras " ) +
+  xlab( " Año " ) +
+  ylab( " Frecuencias " ) +
+  voltear_coord() +
+  tema_minimal()
+
+# 5. Visualización del objeto
+GB2
+
+# ------------------------------------------------- -
+#            Histograma
+# ------------------------------------------------- --
+
+# 1.- Construcción del gráfico
+
+HG <- ggplot( pingüinos , aes( x = largo_aleta_mm )) +
+  histograma_geom( columna = " negro " , relleno = " verdeprimavera4 " ) +
+  ggtitle( " Histograma " ) +
+  xlab( " Largo de la aleta (mm) " ) +
+  ylab( " Frecuencias " ) +
+  tema_clásico()
+
+# 2.- Visualización del gráfico
+HG
+
+# ----------------------------------
+#    Gráfico de dispersión
+# -----------------------------------
+
+# 1.- Construcción del gráfico
+
+GD <- ggplot( pingüinos , aes( x = largo_pico_mm , y = grosor_pico_mm )) +
+  geom_point(aes( color = especie )) +
+  ggtitle( " Gráfico de dispersión " ) +
+  xlab( " largo del pico (mm) " ) +
+  ylab( " grosor del pico (mm) " ) +
+  tema_luz()
+
+# 2.- Visualización del objeto
+GD
+
+# -------------------------------
+#   Organización de gráficos
+# -------------------------------
+
+# 1.- Descargar el paquete gridExtra
+
+install.packages( " gridExtra " )
+
+# 2.- Abrir la libreria
+biblioteca ( rejillaExtra )
+
+# 3.- Organización 2 gráficos en una fila y dos columnas
+grid.arrange( BX , GB1 , nrow = 1 , ncol = 2 )
+
+# 4.- Organización 3 gráficos en dos filas y dos columnas
+grid.arrange( BX , GB1 , HG , nrow = 2 , ncol = 2 )
+
+# 5.- Organización 4 gráficos en dos filas y dos columnas
+grid.arrange( BX , GB1 , HG , GD , nrow = 2 , ncol = 2 )
